@@ -22,3 +22,11 @@ Keep the palette limited to these three colors (plus white/black only if needed 
 
 - Professional but approachable — this represents the user as a freelancer pitching to potential clients.
 - Keep copy concise; avoid filler text in final content (placeholder/lorem ipsum is fine during layout work only).
+- The user (John) is genuinely just starting his freelance journey with no client history yet. Never fabricate experience, stats, or testimonials (e.g. years of experience, task counts, case-study results, quotes from fictional clients) to make him look more established than he is. Frame capability honestly: tools known, effort, availability, sample/practice work — not invented track record.
+
+## Deployment
+
+- Repo: `github.com/JohnLloydMamauag/va-portfolio` (public, `main` branch), connected to two auto-deploying targets:
+  - GitHub Pages: `johnlloydmamauag.github.io/va-portfolio`
+  - Vercel: `va-portfolio-orpin.vercel.app`
+- Default to committing and pushing to `main` after making changes, without asking each time — both deployments pick it up automatically.
