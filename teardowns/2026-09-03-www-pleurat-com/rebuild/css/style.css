@@ -1,0 +1,543 @@
+/* =====================================================================
+   pleurat.com — bo-rebuild study clone
+   Tokens ported VERBATIM from the teardown (both independent systems):
+     System 1 (public content, amber/paper) — theme-DOAwoE7X.css.beautified.css:1-100
+     System 2 (global chrome, lime/mint)     — index-sXIK4by5.css.beautified.css:30-98
+   Typography clamp() scale, spacing, breakpoints — build-analysis.md
+   "Typography and Spacing" + confirmed against source/layout-manifest.json.
+   ===================================================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: auto; }
+body { overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font: inherit; background: none; border: 0; cursor: pointer; color: inherit; }
+ul { list-style: none; }
+
+/* ---------- System 2: global chrome tokens — index-sXIK4by5.css.beautified.css:30-58 ---------- */
+:root {
+  --bg: #c2ffa8;
+  --lime: #C0EB3A;
+  --lime-2: #E2F79A;
+  --lime-deep: #1A2200;
+  --sans: "General Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ease: cubic-bezier(.22,1,.36,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+  --ink: #0F1524;
+  --ink-2: #383c48;
+  --line: rgba(15,21,36,.1);
+}
+[data-theme="dark"] {
+  --bg: #050711;
+  --lime-deep: #10160a;
+  --ink: #EFEDE2;
+  --ink-2: #B7B5AA;
+  --line: rgba(239,237,226,.13);
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); }
+
+/* ---------- System 1: public-content tokens — theme-DOAwoE7X.css.beautified.css:1-42 ---------- */
+.site-root {
+  --sv-page: #FFFCF0;
+  --sv-sheet: #FFFDF3;
+  --sv-paper: #FBF7E6;
+  --sv-paper-2: #F3EDD6;
+  --sv-tile: #EFE9D2;
+  --sv-ink: #16140E;
+  --sv-ink-2: #57534A;
+  --sv-ink-3: #8B8577;
+  --sv-amber: #F3B44A;
+  --sv-amber-2: #C77E0A;
+  --sv-amber-lt: #F9CB80;
+  --sv-line: rgba(22,20,14,.16);
+  --sv-line-2: rgba(22,20,14,.08);
+  --sv-sans: "General Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --sv-code: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sv-fs-display: clamp(37px,4.05vw,64px);
+  --sv-fs-h2: clamp(31px,3.05vw,47px);
+  --sv-fs-h3: clamp(38px,3.6vw,56px);
+  --sv-fs-h4: 21px;
+  --sv-fs-lead: 19px;
+  --sv-fs-body: 17px;
+  --sv-fs-sm: 15px;
+  --sv-fs-meta: 12.5px;
+  --sv-fs-micro: 10.5px;
+  --sv-sp: clamp(96px,12vh,152px);
+  --sv-sp-head: clamp(46px,6vh,78px);
+  --sv-gutter: 44px;
+  --sv-inset: 24px;
+  --sv-max: min(1524px,88vw);
+  --sv-nav-h: 62px;
+  --sv-ease: cubic-bezier(.2,.8,.2,1);
+  --sv-ease-mask: cubic-bezier(.2,.85,.2,1);
+  /* global fluid scale — index-sXIK4by5.css.beautified.css:71-89 */
+  --fs-h1: clamp(36px,3.5vw,54px);
+  --fs-display: clamp(42px,4.1vw,64px);
+  --fs-display-lg: clamp(52px,5.4vw,84px);
+  --fs-ghost: clamp(180px,28vw,420px);
+}
+@media (max-width:1536px){ .site-root{ --sv-max:96vw; --sv-gutter:28px; } }
+@media (max-width:1180px){ .site-root{ --sv-max:98vw; --sv-gutter:22px; --sv-inset:18px; } }
+@media (max-width:960px){
+  .site-root{
+    --sv-max:100vw; --sv-sp:clamp(64px,8vh,96px); --sv-sp-head:clamp(32px,4.6vh,48px);
+    --sv-gutter:13px; --sv-inset:12px; --sv-nav-h:56px;
+    --sv-fs-body:16.5px; --sv-fs-lead:17.5px;
+    --sv-fs-h2:clamp(32px,8.7vw,41px); --sv-fs-h3:clamp(34px,9vw,46px);
+  }
+}
+.site-root.is-dark {
+  --sv-page: #13120D; --sv-sheet: var(--sv-page); --sv-paper: #17160E; --sv-paper-2: #1F1C11;
+  --sv-tile: #221F13; --sv-ink: #F1EEE6; --sv-ink-2: #A4A097; --sv-ink-3: #928C7E;
+  --sv-amber: #F3B44A; --sv-amber-2: #DD922F; --sv-amber-lt: #F9CB80;
+  --sv-line: rgba(241,238,230,.24); --sv-line-2: rgba(241,238,230,.12);
+  color-scheme: dark;
+}
+html:not([data-theme="dark"]) .site-root.is-dark { /* toggle removes the class via JS, kept for spec clarity */ }
+.site-root {
+  background: var(--sv-page);
+  color: var(--sv-ink);
+  font-family: var(--sv-sans);
+  font-size: var(--sv-fs-body);
+  line-height: 1.55;
+  overflow-x: clip;
+  position: relative;
+}
+
+/* ---------- Layout primitives ----------
+   52px content inset (--sv-gutter 28px + --sv-inset 24px at the 1440 breakpoint) confirmed
+   against source/layout-manifest.json: h2 headings in #tools/#profile sit at x=80.8 while
+   their .sv-wrap container sits at x=28.8 — a consistent 52px indent beyond the centered
+   container, not accounted for by the container width formula alone. */
+.sv-wrap { width: var(--sv-max); max-width: var(--sv-max); margin-inline: auto; padding-inline: 52px; }
+.sv-pad { padding-block: var(--sv-sp); }
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4 { font-weight: 500; color: var(--sv-ink); }
+h1 { font-size: var(--sv-fs-display); letter-spacing: -0.03em; line-height: 1.04; }
+h2 { font-size: var(--sv-fs-h2); letter-spacing: -0.03em; line-height: 1.06; margin-bottom: 18px; }
+h2 strong { color: var(--sv-amber-2); font-weight: 500; }
+h3 { font-size: var(--sv-fs-h4); letter-spacing: -0.02em; }
+p { color: var(--sv-ink-2); font-size: var(--sv-fs-body); max-width: 46ch; }
+
+/* ---------- Reveal engines ----------
+   #3 IO line/fade reveal — verbatim CSS given in build-analysis.md, sourced from
+   te()/ne/Ce/Be, theme-CvJK8SGN.js.beautified.js:127-152. */
+.sv-rv { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s var(--sv-ease); }
+.sv-rv.is-in { opacity: 1; transform: translateY(0); }
+.sv-lines .sv-ln > span { display: inline-block; overflow: hidden; }
+.sv-lines .sv-ln > span > span { display: inline-block; transform: translateY(140%); transition: transform .9s var(--sv-ease-mask); }
+.sv-lines.is-in .sv-ln > span > span { transform: translateY(0); }
+.sv-lines .sv-ln:nth-child(1) > span > span { transition-delay: 0ms; }
+.sv-lines .sv-ln:nth-child(2) > span > span { transition-delay: 80ms; }
+.sv-lines .sv-ln:nth-child(3) > span > span { transition-delay: 160ms; }
+.sv-fade { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--sv-ease), transform .7s var(--sv-ease); }
+.sv-fade.is-in { opacity: 1; transform: translateY(0); }
+.sv-dim { color: var(--sv-ink-3); }
+
+/* ---------- Buttons ---------- */
+.sv-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 100px; font-size: 15px; font-weight: 500; transition: transform .3s var(--ease-spring), background .3s var(--sv-ease); }
+.sv-btn--amber { background: var(--sv-amber); color: #16140E; }
+.sv-btn--amber:hover { transform: translateY(-2px); background: var(--sv-amber-lt); }
+.sv-btn--ghost { border: 1px solid var(--sv-line); color: var(--sv-ink); }
+.sv-btn--ghost:hover { transform: translateY(-2px); border-color: var(--sv-amber-2); }
+.sv-ar { width: 15px; height: 15px; }
+.sv-ar.sm { width: 12px; height: 12px; }
+
+/* ---------- Curtain + boot loader ----------
+   kt(), index-DwCqBxFL.js.beautified.js:2419-2576. K=8 cols, 38ms/col stagger,
+   cover .48s / reveal .52s CSS transition (choreographed by JS state classes:
+   is-cover 0-746ms w/ old-content-hidden at 260ms, is-covered hold to 1086ms,
+   is-reveal 786ms+60ms). Wipe curve cubic-bezier(.72,0,.22,1),
+   amber 2px bottom rule — index-sXIK4by5.css.beautified.css:606-737. */
+.sv-curtain {
+  position: fixed; inset: 0; z-index: 500; pointer-events: none; visibility: hidden;
+  --n: 8; --cw: 12.5vw; --cover: .48s; --reveal: .52s; --stagger: 38ms;
+}
+.sv-curtain.is-on { visibility: visible; }
+.sv-curtain-col {
+  position: absolute; top: 0; height: 100%;
+  left: calc(var(--i) * var(--cw)); width: calc(var(--cw) + 1.5px);
+  background-color: #fbf7e6;
+  background-image: repeating-linear-gradient(0deg, rgba(22,20,14,.04) 0 1px, transparent 1px 4px), linear-gradient(180deg,#fbf7e6,#f3edd6);
+  transform: translateY(-101%);
+  transition: transform var(--cover) cubic-bezier(.72,0,.22,1);
+  transition-delay: calc(var(--i) * var(--stagger));
+}
+.sv-curtain-col:after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #f3b44a; opacity: .9; }
+.sv-curtain.is-cover .sv-curtain-col, .sv-curtain.is-covered .sv-curtain-col { transform: translateY(0); }
+.sv-curtain.is-covered .sv-curtain-col { transition: none; }
+.sv-curtain.is-reveal .sv-curtain-col {
+  transform: translateY(-101%);
+  transition: transform var(--reveal) cubic-bezier(.72,0,.22,1);
+  transition-delay: calc((var(--n) - 1 - var(--i)) * var(--stagger));
+}
+.sv-curtain-label { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; color: #16140e; opacity: 0; transition: opacity .3s ease; }
+.sv-curtain.show-label .sv-curtain-label { opacity: 1; }
+.sv-curtain-label .name { font-family: var(--sans); font-weight: 500; font-size: max(42px,5.6vw); letter-spacing: -.045em; line-height: .92; }
+.sv-curtain-label .name .d { color: #f3b44a; }
+.sv-curtain-label.is-boot .name { display: inline-block; background-image: linear-gradient(90deg,#16140e 0,#16140e calc(var(--p)*1.03% - 3%),#16140e2b calc(var(--p)*1.03%),#16140e2b); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.sv-curtain-label.is-boot .name .d { color: #f3b44a; -webkit-text-fill-color: #F3B44A; }
+.sv-curtain.is-dark .sv-curtain-col { background-color: #17160e; background-image: repeating-linear-gradient(0deg, rgba(241,238,230,.05) 0 1px, transparent 1px 4px), linear-gradient(180deg,#17160e,#1f1c11); }
+.sv-curtain.is-dark .sv-curtain-label { color: #f1eee6; }
+.sv-curtain.is-dark .sv-curtain-label.is-boot .name { background-image: linear-gradient(90deg,#f1eee6 0,#f1eee6 calc(var(--p)*1.03% - 3%),#f1eee633 calc(var(--p)*1.03%),#f1eee633); }
+@media (prefers-reduced-motion: reduce) { .sv-curtain { display: none !important; } }
+
+/* ---------- Nav ---------- source/rendered.html:172-246 */
+/* fixed cream panel + dark ink, does not flip with the is-dark toggle — see the footer
+   comment above for the citation. */
+.sv-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 90; height: var(--sv-nav-h); background: rgba(251,247,230,.88); color: #16140E; backdrop-filter: blur(10px); border-bottom: 1px solid var(--sv-line-2); }
+.sv-nav-in { max-width: var(--sv-max); margin-inline: auto; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-inline: var(--sv-inset); }
+.sv-brand-logo { width: 84px; height: auto; color: var(--sv-ink); }
+.sv-nav-links { display: flex; gap: 26px; font-size: 14.5px; }
+.sv-nav-links a[aria-current="page"] { color: var(--sv-amber-2); }
+.sv-lights { width: 30px; height: 30px; display: grid; place-items: center; }
+.sv-dial-mk { width: 18px; height: 18px; }
+.sv-dial-mk .rim { fill: none; stroke: var(--sv-ink); stroke-width: 1.4; }
+.sv-dial-mk .half { fill: var(--sv-ink); }
+.sv-nav-toggle { display: none; flex-direction: column; gap: 5px; width: 22px; }
+.sv-nav-toggle span { display: block; height: 2px; background: var(--sv-ink); }
+.sv-nav-sheet { position: fixed; top: var(--sv-nav-h); left: 0; right: 0; height: calc(100vh - var(--sv-nav-h)); z-index: 89; background: var(--sv-paper); overflow-y: auto; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .3s var(--sv-ease), transform .3s var(--sv-ease); }
+.sv-nav-sheet.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.sv-nav-sheet-in { padding: 32px var(--sv-inset); }
+.sv-nav-sheet .links .ln { display: flex; gap: 14px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--sv-line-2); font-size: 22px; }
+.sv-nav-sheet .ix { color: var(--sv-ink-3); font-family: var(--sv-code); font-size: 13px; }
+.sv-nav-foot { margin-top: 24px; display: flex; flex-direction: column; gap: 6px; color: var(--sv-ink-2); }
+@media (max-width:900px){ .sv-nav-links, .sv-nav-cta { display: none; } .sv-nav-toggle { display: flex; } }
+
+/* ---------- Hero ---------- source/rendered.html:247-2354 */
+.sv-hero { padding-top: calc(var(--sv-nav-h) + var(--sv-sp-head) + 30px); padding-bottom: 40px; background: var(--sv-page); }
+.sv-hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: end; }
+.sv-hero h1 { max-width: 760px; }
+.sv-lines .sv-ln { display: block; }
+.sv-hero-right p { max-width: 42ch; margin-bottom: 26px; color: var(--sv-ink-2); font-size: var(--sv-fs-lead); }
+.sv-hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+@media (max-width:860px){ .sv-hero-grid { grid-template-columns: 1fr; } }
+
+/* Street scene — Commuter figure, SIMPLIFIED per notes above index.html section comment.
+   Walk-cycle keyframes ported VERBATIM — theme-DOAwoE7X.css.beautified.css:2002-2264. */
+.sv-street { margin-top: 56px; position: relative; border-radius: 18px; overflow: hidden; background: linear-gradient(180deg,var(--sv-paper),var(--sv-paper-2)); padding: 18px 0 0; }
+.sv-street-read { display: flex; align-items: baseline; gap: 12px; padding: 0 24px 12px; font-size: 13px; }
+.sv-street-read .ix { font-family: var(--sv-code); color: var(--sv-amber-2); }
+.sv-street-read .name { font-weight: 500; margin-right: 8px; }
+.sv-street-read .role { color: var(--sv-ink-3); }
+.sv-street-read .ahead { margin-left: auto; color: var(--sv-ink-3); text-transform: uppercase; letter-spacing: .08em; font-size: 10.5px; }
+.sv-street-view { width: 100%; }
+.sv-street-view svg { width: 100%; display: block; }
+.sv-street .far rect { fill: none; stroke: var(--sv-ink-3); stroke-width: .9; opacity: .35; }
+.sv-street .sun { fill: none; stroke: var(--sv-amber-2); stroke-width: 1.4; }
+.sv-street .sun-halo { fill: url(#sv-lamp-glow); }
+.sv-street .road-strip { fill: var(--sv-line-2); }
+.sv-street .walker { transition: transform .05s linear; }
+.sv-street .walker .thigh, .sv-street .walker .foot { fill: var(--sv-ink); }
+.sv-street .walker .head { fill: var(--sv-amber); }
+.sv-street .walker .torso { fill: var(--sv-amber-2); }
+.sv-street .walker .body { animation: sv-walk-bob var(--wk) linear infinite; transform-origin: center; }
+.sv-street .walker .leg-f .thigh { animation: sv-walk-thigh var(--wk) linear infinite; transform-origin: 0 0; }
+.sv-street .walker .leg-f .foot { animation: sv-walk-foot var(--wk) linear infinite; transform-origin: 0 0; }
+.sv-street .walker .leg-b .thigh { animation: sv-walk-thigh var(--wk) linear infinite reverse; transform-origin: 0 0; }
+.sv-street .walker .leg-b .foot { animation: sv-walk-foot var(--wk) linear infinite reverse; transform-origin: 0 0; }
+.sv-street .walker .arm .shoulder { animation: sv-walk-shoulder var(--wk) ease-in-out infinite calc(var(--wk) * -.64); transform-origin: 0 0; }
+.sv-street .walker .lift { animation: sv-walk-carry var(--wk) ease-in-out infinite; transform-origin: center; }
+
+@keyframes sv-walk-thigh {
+  0%{transform:rotate(-25.4deg)} 3%{transform:rotate(-23.5deg)} 8%{transform:rotate(-25.8deg)}
+  16%{transform:rotate(-15.8deg)} 24%{transform:rotate(-5.4deg)} 32%{transform:rotate(-9.2deg)}
+  40%{transform:rotate(-10deg)} 48%{transform:rotate(-8.2deg)} 55%{transform:rotate(-4deg)}
+  62%{transform:rotate(-.9deg)} 70%{transform:rotate(-15deg)} 78%{transform:rotate(-25deg)}
+  86%{transform:rotate(-26.4deg)} 93%{transform:rotate(-25.9deg)} to{transform:rotate(-25.4deg)}
+}
+@keyframes sv-walk-knee {
+  0%{transform:rotate(4.3deg)} 3%{transform:rotate(4.3deg)} 8%{transform:rotate(20.1deg)}
+  16%{transform:rotate(12.8deg)} 24%{transform:rotate(4.3deg)} 32%{transform:rotate(25.5deg)}
+  40%{transform:rotate(39.9deg)} 48%{transform:rotate(48.7deg)} 55%{transform:rotate(48.8deg)}
+  62%{transform:rotate(50.8deg)} 70%{transform:rotate(52deg)} 78%{transform:rotate(40deg)}
+  86%{transform:rotate(20deg)} 93%{transform:rotate(7deg)} to{transform:rotate(4.3deg)}
+}
+@keyframes sv-walk-foot {
+  0%{transform:rotate(12.1deg)} 3%{transform:rotate(15.2deg)} 8%{transform:rotate(5.7deg)}
+  16%{transform:rotate(3deg)} 24%{transform:rotate(1.1deg)} 32%{transform:rotate(-1.3deg)}
+  40%{transform:rotate(-10.9deg)} 48%{transform:rotate(-14.5deg)} 55%{transform:rotate(-11.8deg)}
+  62%{transform:rotate(-12.9deg)} 70%{transform:rotate(-19deg)} 78%{transform:rotate(-7deg)}
+  86%{transform:rotate(.4deg)} 93%{transform:rotate(9.9deg)} to{transform:rotate(12.1deg)}
+}
+@keyframes sv-walk-shoulder { 0%,to{transform:rotate(-21deg)} 50%{transform:rotate(8deg)} }
+@keyframes sv-walk-bob { 0%{transform:translateY(2px)} 25%{transform:translateY(0)} 50%{transform:translateY(2px)} 75%{transform:translateY(0)} to{transform:translateY(2px)} }
+@keyframes sv-walk-rise { 0%{transform:translateY(-.9px)} 25%{transform:translateY(0)} 50%{transform:translateY(-.9px)} 75%{transform:translateY(0)} to{transform:translateY(-.9px)} }
+@keyframes sv-walk-carry { 0%{transform:rotate(-2.4deg)} 25%{transform:rotate(1.6deg)} 50%{transform:rotate(-2.4deg)} 75%{transform:rotate(1.6deg)} to{transform:rotate(-2.4deg)} }
+@keyframes sv-street-say { 0%{opacity:0; transform:translateY(6px);} 100%{opacity:1; transform:translateY(0);} }
+.sv-street-read.is-swap .say { animation: sv-street-say .5s linear; }
+
+/* ---------- Console / workspace demo ---------- content/03-console.md
+   Measured section height (source/layout-manifest.json, y=557.8->1444.1) is shorter than
+   a standard .sv-pad rhythm section, so this one gets a tighter local padding-block. */
+#contact.sv-pad { padding-block: 90px; }
+.sv-cn { background: var(--sv-tile); border: 1px solid var(--sv-line); border-radius: 18px; overflow: hidden; }
+.sv-cn-bar { display: flex; align-items: center; gap: 14px; padding: 12px 18px; border-bottom: 1px solid var(--sv-line); font-size: 12.5px; color: var(--sv-ink-3); }
+.sv-cn-bar .sq { display: flex; gap: 5px; }
+.sv-cn-bar .sq i { width: 8px; height: 8px; border-radius: 50%; background: var(--sv-line); display: block; }
+.sv-cn-bar .crumb { font-family: var(--sv-code); }
+.sv-cn-bar .pill { margin-left: auto; background: var(--sv-amber); color: #16140E; padding: 3px 10px; border-radius: 100px; font-size: 11px; }
+.sv-cn-body { display: grid; grid-template-columns: 240px 1fr; }
+.sv-cn-side { padding: 14px 16px; border-right: 1px solid var(--sv-line); }
+.sv-cn-side h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--sv-ink-3); margin-bottom: 8px; }
+.sv-cn-jobs li { padding: 7px 10px; border-radius: 10px; cursor: pointer; margin-bottom: 2px; transition: background .3s var(--sv-ease); }
+.sv-cn-jobs li:hover { background: var(--sv-paper-2); }
+.sv-cn-jobs li.is-sel { background: var(--sv-paper); border: 1px solid var(--sv-line); }
+.sv-cn-jobs .t { display: block; font-size: 14px; }
+.sv-cn-jobs .s { display: block; font-size: 11.5px; color: var(--sv-ink-3); }
+.sv-cn-progress { margin-top: 14px; font-family: var(--sv-code); font-size: 11.5px; color: var(--sv-ink-3); }
+.sv-cn-canvas { position: relative; padding: 12px 18px; min-height: 140px; }
+.sv-cn-stageline { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; font-size: 12px; color: var(--sv-ink-3); }
+.sv-cn-diagram { width: 100%; max-width: 260px; }
+.sv-b-diagram, .sv-cn-diagram { display: block; }
+.dg-n { fill: var(--sv-paper); stroke: var(--sv-line); }
+.dg-t { font-size: 11px; fill: var(--sv-ink-2); text-anchor: middle; font-family: var(--sv-code); }
+.dg-l { fill: none; stroke: var(--sv-line); stroke-width: 1.4; }
+.sv-note.sticky { position: absolute; background: var(--sv-amber-lt); color: #16140E; padding: 10px 12px; font-size: 11.5px; border-radius: 4px; box-shadow: 0 8px 20px -12px rgba(0,0,0,.4); animation: sv-note-wobble 3.6s ease-in-out infinite; }
+.sv-note.s-1 { top: 96px; left: 2%; width: 150px; transform-origin: 20% 20%; }
+.sv-note.s-2 { top: 96px; left: 54%; width: 118px; transform-origin: 60% 20%; animation-delay: -1.8s; }
+/* idle sticky-note "breathe" — the closest live-observed magic number for Gate 5:
+   source/layout-manifest.json scroll-18pct/-91pct show computed matrix scale factors
+   0.813-1.007 on these two elements; reproduced as a slow idle scale pulse. */
+@keyframes sv-note-wobble { 0%,100%{ transform: scale(1); } 50%{ transform: scale(.9); } }
+.pane.chat { margin-top: 10px; background: var(--sv-paper); border: 1px solid var(--sv-line); border-radius: 10px; padding: 10px; max-width: 260px; font-size: 12px; }
+.pane-label { font-size: 11px; text-transform: uppercase; color: var(--sv-ink-3); margin-bottom: 8px; }
+.msg { margin-bottom: 8px; padding: 8px 10px; border-radius: 8px; }
+.msg.user { background: var(--sv-tile); }
+.msg.ai { background: var(--sv-amber-lt); color: #16140E; }
+.pane-sig { text-align: right; font-family: var(--sv-code); font-size: 11px; color: var(--sv-ink-3); }
+.sv-cn-canvas .vars { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.sv-cn-canvas .vars span { font-family: var(--sv-code); font-size: 11px; background: var(--sv-paper-2); padding: 4px 10px; border-radius: 100px; }
+
+/* ---------- Freehand "ink" doodle layer — E(), ported verbatim from
+   theme-DOAwoE7X.css.beautified.css:10527-10590. .sv-ink wraps .sv-cn-canvas (see
+   console-ink.js); --sv-mono in source is this rebuild's --sv-code (see other font-family
+   uses throughout this file), swapped in below rather than left dangling. */
+.sv-ink {
+  position: relative; width: 100%; height: 100%;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3.5-1 12-12-2.5-2.5-12 12z' fill='%23FBF7E6' stroke='%2316140E' stroke-width='1.4' stroke-linejoin='round'/><path d='M16 5.5l2.5 2.5 1.8-1.8a1.2 1.2 0 0 0 0-1.7l-.8-.8a1.2 1.2 0 0 0-1.7 0z' fill='%23F3B44A' stroke='%2316140E' stroke-width='1.4' stroke-linejoin='round'/><path d='M3 21l1-3.5 2.5 2.5z' fill='%2316140E'/></svg>") 2 22, crosshair;
+}
+.sv-ink-layer { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
+.sv-ink-layer .ink { fill: none; stroke: var(--sv-ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .82; vector-effect: non-scaling-stroke; }
+.sv-ink-layer .ink.is-live { stroke: var(--sv-amber-2); opacity: 1; }
+.sv-ink .pane, .sv-ink .sticky, .sv-ink .node { z-index: 2; }
+.sv-ink .pane, .sv-ink .sticky { cursor: default; }
+.sv-ink-hint { position: absolute; right: 12px; bottom: 10px; z-index: 3; font-family: var(--sv-code); font-size: var(--sv-fs-micro); letter-spacing: .14em; text-transform: uppercase; color: var(--sv-ink-3); pointer-events: none; }
+@media (pointer:coarse) { .sv-ink { cursor: default; } }
+
+.sv-cn-log { font-family: var(--sv-code); font-size: 12px; padding: 12px 22px; border-top: 1px solid var(--sv-line); min-height: 90px; white-space: pre-wrap; color: var(--sv-ink-2); }
+.sv-cn-log .ok { color: var(--sv-amber-2); }
+.sv-cn-prompt { display: flex; align-items: center; gap: 12px; padding: 10px 22px; border-top: 1px solid var(--sv-line); }
+.sv-cn-prompt input { flex: 1; background: var(--sv-paper); border: 1px solid var(--sv-line); border-radius: 8px; padding: 10px 12px; font-family: var(--sv-code); font-size: 13px; color: var(--sv-ink); }
+.sv-cn-actions { display: flex; gap: 8px; }
+.sv-cn-actions button { font-size: 12px; padding: 6px 12px; border-radius: 100px; border: 1px solid var(--sv-line); }
+.sv-cn-foot { padding: 16px 22px; border-top: 1px solid var(--sv-line); font-size: 12px; color: var(--sv-ink-3); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+@media (max-width:760px){ .sv-cn-body { grid-template-columns: 1fr; } .sv-cn-side { border-right: 0; border-bottom: 1px solid var(--sv-line); } }
+
+/* ---------- Focus / Tracks ---------- source/rendered.html:2545-2791 */
+.sv-inst-sec { padding-block: var(--sv-sp); background: var(--sv-page); }
+.sv-inst-body { display: grid; grid-template-columns: .8fr 1.2fr; gap: 40px; align-items: center; margin-top: 44px; }
+.sv-inst-art { width: 100%; max-width: 220px; }
+.art-board { fill: var(--sv-paper); stroke: var(--sv-line); }
+.art-in { fill: var(--sv-tile); opacity: 0; animation: sv-art-in .66s var(--sv-ease) forwards; }
+.art-in.a1 { animation-delay: .05s; } .art-in.a2 { animation-delay: .16s; } .art-in.a3 { animation-delay: .27s; } .art-in.a4 { animation-delay: .38s; }
+@keyframes sv-art-in { from{ opacity:0; transform: translateY(10px);} to{ opacity:1; transform: translateY(0);} }
+.sv-track .badge { font-family: var(--sv-code); font-size: 11px; color: var(--sv-amber-2); letter-spacing: .08em; }
+.sv-track h3 { font-size: var(--sv-fs-h3); margin: 10px 0 12px; }
+.sv-rnav { display: flex; align-items: center; gap: 14px; margin-top: 58px; font-family: var(--sv-code); font-size: 13px; }
+.sv-rnav button { width: 34px; height: 34px; border: 1px solid var(--sv-line); border-radius: 50%; }
+.sv-rnav button:disabled { opacity: .35; cursor: default; }
+@media (max-width:860px){ .sv-inst-body { grid-template-columns: 1fr; } }
+
+/* ---------- Chart / by-the-numbers pinned scene ----------
+   source/rendered.html:2792-2861. Pin height 2385px measured live
+   (source/runtime-probes.json stickyScenes) — reproduced via the generic scroll-pin
+   primitive (js/engines/scroll-pin.js, ported from Ve()/b). Diagram draw-on keyframes
+   sv-b-wire/node/lbl/line/path/stick/type all run 5000ms linear, confirmed in
+   source/runtime-probes.json probes.animations. */
+.sv-chart-sec { position: relative; height: 2385px; background: var(--sv-paper); }
+.sv-chart-pin { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; }
+.sv-chart-track { width: var(--sv-max); margin-inline: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.sv-b-diagram { width: 100%; }
+.sv-b-wire, .sv-b-line, .sv-b-path { fill: none; stroke: var(--sv-amber-2); stroke-width: 2.5; stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: sv-b-draw 5000ms linear infinite; }
+.sv-b-node { fill: var(--sv-amber); opacity: 0; animation: sv-b-node 5000ms linear infinite; }
+.sv-b-lbl { fill: var(--sv-ink-2); font-family: var(--sv-code); font-size: 13px; opacity: 0; animation: sv-b-lbl 5000ms linear infinite; }
+.sv-b-stick { fill: var(--sv-amber-lt); opacity: 0; animation: sv-b-stick 5000ms linear infinite; }
+.sv-b-type { fill: #16140E; font-family: var(--sv-code); font-size: 12px; opacity: 0; animation: sv-b-type 5000ms linear infinite; }
+@keyframes sv-b-draw { 0%{ stroke-dashoffset: 1200; } 55%,100%{ stroke-dashoffset: 0; } }
+@keyframes sv-b-node { 0%,40%{ opacity: 0; } 55%,100%{ opacity: 1; } }
+@keyframes sv-b-lbl { 0%,45%{ opacity: 0; } 60%,100%{ opacity: 1; } }
+@keyframes sv-b-stick { 0%,60%{ opacity: 0; } 75%,100%{ opacity: 1; } }
+@keyframes sv-b-type { 0%,65%{ opacity: 0; } 80%,100%{ opacity: 1; } }
+.sv-pin-badge { display: inline-block; font-family: var(--sv-code); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--sv-amber-2); margin-bottom: 14px; }
+.sv-chart-copy h2 { margin-top: 6px; }
+.sv-chart-copy p { margin-bottom: 20px; }
+.sv-chart { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: 36px; }
+.sv-chart .stat { transition: opacity .5s var(--ease), transform .5s var(--ease); transition-delay: var(--d); }
+.sv-chart .n { font-size: var(--fs-display); font-weight: 500; color: var(--sv-ink); }
+.sv-chart .p { font-size: 22px; color: var(--sv-amber-2); }
+.sv-chart .l { display: block; font-size: 12.5px; color: var(--sv-ink-3); margin-top: 4px; }
+@media (max-width:960px){ .sv-chart-track { grid-template-columns: 1fr; } .sv-chart { grid-template-columns: repeat(2,1fr); } }
+
+/* ---------- AI tools grid ---------- source/rendered.html:2862-2961
+   Per-item opacity (1, .92, .84, 1, .74, .98, -, .9, .9, 1) is a PERMANENT "recency of
+   use" dimming baked into content/06-ai-tools.md, not a reveal-animation artifact — the
+   teardown's own capture shows these values already settled at scrollY=0, so this grid is
+   NOT wired to the Fe() stagger-reveal (that call site is Console's small tag pills, see
+   .vars below); each tile is simply always visible at its authored opacity. */
+#tools { background: var(--sv-page); }
+#tools.sv-pad { padding-bottom: calc(var(--sv-sp) + 55px); }
+.sv-tools { display: flex; gap: 73px; flex-wrap: wrap; margin-top: 69px; padding-left: 30px; row-gap: 40px; }
+.tool { width: 55.5px; height: 55.5px; display: grid; place-items: center; }
+.tool img { width: 100%; height: 100%; object-fit: contain; }
+.tool .ring { width: 90%; height: 90%; border-radius: 50%; border: 2px solid var(--sv-ink-3); display: block; }
+
+/* ---------- Teams / Ledger card grid ---------- source/rendered.html:2962-3036 */
+#profile { background: var(--sv-page); }
+#profile.sv-pad { padding-bottom: calc(var(--sv-sp) + 85px); }
+.sv-board { display: grid; grid-template-columns: repeat(5,1fr); column-gap: 29px; row-gap: 94px; margin-top: 71px; }
+.sv-card { padding-top: 24px; border-top: 1px solid var(--sv-line); opacity: 0; transform: translateY(12px) scale(.96); }
+.sv-card .ix { display: block; font-family: var(--sv-code); font-size: 11px; color: var(--sv-ink-3); margin-bottom: 10px; }
+.sv-card h3 { font-size: 21px; margin-bottom: 4px; }
+.sv-card .role { display: block; font-size: 12.5px; color: var(--sv-amber-2); margin-bottom: 10px; }
+.sv-card p { font-size: 13px; color: var(--sv-ink-2); }
+@media (max-width:960px){ .sv-board { grid-template-columns: repeat(2,1fr); } }
+
+/* ---------- Mosaic pinned scene ----------
+   source/rendered.html:3037-3104. Pin height 2880px measured live. Horizontal-scrub
+   mechanics INFERRED (see index.html comment + VERIFICATION.md): a 5-col x 4-row grid
+   translated via the same scroll-pin progress primitive as the chart scene. */
+.sv-mosaic-track { position: relative; height: 2880px; background: var(--sv-page); }
+.sv-mosaic-pin { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; }
+.sv-mosaic-link { display: block; width: 100%; }
+.sv-mosaic-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(4,1fr); gap: 8px; width: max-content; will-change: transform; padding-inline: 4vw; }
+.sv-mosaic-grid .tile { width: 22vw; height: 22vh; overflow: hidden; border-radius: 6px; background: var(--sv-tile); }
+.sv-mosaic-grid .tile.is-lead { width: 30vw; height: 30vh; }
+.sv-mosaic-grid .tile img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Footer + board-walk marquee ----------
+   $e(), theme-CvJK8SGN.js.beautified.js:846-984. b=300 chip cell, d=118 baseline,
+   Z=168 viewBox height, pe=190 px/sec conveyor speed, V=60 ground-pad spacing. */
+/* header/nav/h1-h3/footer render a FIXED dark ink (#16140E) on a FIXED cream panel
+   regardless of the amber/paper theme toggle — confirmed live, build-analysis.md
+   "Typography and Spacing": "header/nav/h1-h3/footer all render a fixed dark ink...
+   they sit on cream/paper panels, not the page background, so they don't flip with
+   theme." Hardcoded hex (not the --sv-paper/--sv-ink vars) so an is-dark toggle can't
+   invert this panel's contrast. */
+.sv-footer { background: #FBF7E6; color: #16140E; padding-top: var(--sv-sp); }
+.sv-footer .sv-wrap { padding-bottom: 40px; }
+/* Correction: the live site has NO dark box around this scene — .sv-board-walk carries no
+   background/radius rule in theme-DOAwoE7X.css.beautified.css at all (confirmed: grep for
+   "sv-board-walk" there only turns up .is-met state selectors and the walk-cycle keyframe
+   scoping, never a base rule). It sits directly on the footer's cream panel
+   (#FBF7E6, .sv-footer above) — verified against a live screenshot of pleurat.com's footer.
+   A previous pass here had wrapped it in a dark PCB-style panel; that was unverified and is
+   corrected below so the (mostly light/beige) part colors ported from source read correctly. */
+.sv-board-walk { position: relative; margin-bottom: 40px; }
+.sv-board-stage { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 24px 0 0; cursor: pointer; }
+.sv-board-lead { position: absolute; z-index: 2; top: 20px; left: 24px; }
+.sv-board-read { display: flex; gap: 12px; align-items: baseline; padding: 0 24px 12px; margin-left: auto; width: fit-content; font-size: 13px; }
+.sv-board-read .ix { font-family: var(--sv-code); color: var(--sv-amber-2); }
+.sv-board-read .name { font-weight: 500; color: var(--sv-ink); }
+.sv-board-read .role { color: var(--sv-ink-3); margin-left: 6px; }
+.sv-board-view { width: 100%; position: relative; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.sv-board-view svg { width: 100%; height: 100%; display: block; }
+.sv-board-view :is(path, rect, circle, ellipse, text) { vector-effect: non-scaling-stroke; }
+.sv-board-view :is(.world, .pads) { will-change: transform; }
+.sv-board-hi { position: absolute; top: 10px; background: var(--sv-amber); color: #16140E; padding: 4px 10px; border-radius: 100px; font-size: 12px; transform: translateX(-50%); }
+
+/* ---------- board-walk PCB scene — ported verbatim from theme-DOAwoE7X.css.beautified.css
+   lines ~781-1166 (we()/part primitives/robot rig). Colors copied as-is: the source hardcodes
+   hex for most board fills/strokes and only reaches for a --sv- token where it actually used
+   one (var(--sv-code) labels, var(--sv-amber)/--sv-amber-2 for LEDs/vias/traces, var(--sv-ink)/
+   --sv-ink-2/--sv-ink-3 for text) — so this block matches that mix rather than inventing token
+   usage the original didn't have. */
+.sv-board-view .trace { fill: none; stroke: #b99a5e; stroke-width: 2.2; }
+.sv-board-view .sig { fill: none; stroke: #c7b48a; stroke-width: 1.1; opacity: .7; }
+.sv-board-view .pad { fill: none; stroke: #c7b48a; stroke-width: 1.1; }
+.sv-board-view .pad-hole { fill: #efe9da; }
+.sv-board-view .pin { stroke: #9a9384; stroke-width: 1.6; stroke-linecap: round; fill: none; }
+.sv-board-view .via { fill: none; stroke: #b99a5e; stroke-width: 1.4; }
+.sv-board-view .chip-body { fill: #e5dfcd; stroke: #8a8272; stroke-width: 1.1; }
+.sv-board-view .die { fill: #d6cfb9; stroke: #8a8272; stroke-width: .7; }
+.sv-board-view .chip-dot { fill: #8a8272; }
+.sv-board-view .chip-label { font-family: var(--sv-code); font-size: 13px; letter-spacing: .06em; fill: var(--sv-ink-2); }
+.sv-board-view .cap { fill: #cbd5dc; stroke: #8a8272; stroke-width: 1; }
+.sv-board-view .cap-band { stroke: #8a8272; stroke-width: 1; }
+.sv-board-view .res { fill: #e0cfc0; stroke: #8a8272; stroke-width: 1; }
+.sv-board-view .res-band { stroke: #a08a6f; stroke-width: 1.4; }
+.sv-board-view .led { fill: var(--sv-amber); stroke: #8a8272; stroke-width: .9; }
+.sv-board-view .led-halo { fill: var(--sv-amber); opacity: .16; }
+.sv-board-view .can { fill: #d9d3c2; stroke: #8a8272; stroke-width: 1; }
+.sv-board-view .can-line { stroke: #8a8272; stroke-width: .9; }
+.sv-board-view .hdr { fill: #3e3a34; }
+.sv-board-view .tran { fill: #4a453d; }
+.sv-board-view .coil { fill: none; stroke: #b99a5e; stroke-width: 2; stroke-linecap: round; }
+.sv-board-view .port { fill: #c9c2b2; stroke: #8a8272; stroke-width: 1; }
+.sv-board-view .port-in { fill: #6e675c; }
+.sv-board-view .silk { font-family: var(--sv-code); font-size: 11px; letter-spacing: .08em; fill: #b4ac98; }
+.sv-board-view .chip { opacity: .6; transition: opacity .5s var(--sv-ease); }
+.sv-board-view .chip.is-on { opacity: 1; }
+.sv-board-view .chip.is-on .die { fill: var(--sv-amber); }
+.sv-board-view .chip.is-on .chip-label { fill: var(--sv-ink); }
+
+/* ---------- robot rig — front (idle/greeted) vs side (walking) pose swap, walk-cycle +
+   core-pulse keyframes. .sv-rig/.sv-404-view selectors from source kept for parity even
+   though this rebuild only mounts the rig inside .sv-board-view/.sv-board-walk. ---------- */
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .front { opacity: 0; transition: opacity .3s ease; pointer-events: none; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .side { opacity: 1; transition: opacity .3s ease; }
+.sv-board-walk.is-met .robot .front { opacity: 1; }
+.sv-board-walk.is-met .robot .side { opacity: 0; }
+.sv-board-walk.is-met .robot * { animation-play-state: paused; }
+.sv-board-walk.is-met .robot .front :is(.core, .ant-led, .wave) { animation-play-state: running; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .eye { fill: var(--sv-amber); }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .front .wave { transform-box: view-box; transform-origin: 13px -29px; }
+.sv-board-walk.is-met .robot .wave { animation: sv-wave .9s ease-in-out infinite; }
+@keyframes sv-wave { 0%, to { transform: rotate(8deg); } 50% { transform: rotate(-24deg); } }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .shadow { fill: var(--sv-ink); opacity: .13; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .body { fill: #c6cbd3; stroke: #6e675c; stroke-width: 1.1; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .head { fill: #d6dae0; stroke: #6e675c; stroke-width: 1.1; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .neck { fill: #9aa0a8; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .visor { fill: #2c2a26; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .vent { fill: #9aa0a8; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .core { fill: var(--sv-amber); stroke: #6e675c; stroke-width: .9; animation: sv-core 1.6s ease-in-out infinite; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .ant { stroke: #6e675c; stroke-width: 1.4; fill: none; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .ant-led { fill: var(--sv-amber); stroke: #6e675c; stroke-width: .8; animation: sv-core 1.6s ease-in-out infinite .3s; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .limb { fill: #b4bac3; stroke: #6e675c; stroke-width: 1; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot .joint { fill: #8b929b; stroke: #6e675c; stroke-width: .9; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot :is(.foot, .grip) { fill: #4a453d; }
+:is(.sv-board-view, .sv-rig, .sv-404-view) .robot :is(.thigh, .knee, .shoulder, .elbow) { transform-box: view-box; transform-origin: 0 0; }
+@keyframes sv-core { 0%, to { opacity: .55; } 50% { opacity: 1; } }
+:is(.sv-board-walk, .sv-rig .rg-bot) .robot .leg-a .thigh { animation: sv-step-hip .5s ease-in-out infinite; }
+:is(.sv-board-walk, .sv-rig .rg-bot) .robot .leg-b .thigh { animation: sv-step-hip .5s ease-in-out infinite -.25s; }
+:is(.sv-board-walk, .sv-rig .rg-bot) .robot .leg-a .knee { animation: sv-step-knee .5s ease-in-out infinite; }
+:is(.sv-board-walk, .sv-rig .rg-bot) .robot .leg-b .knee { animation: sv-step-knee .5s ease-in-out infinite -.25s; }
+:is(.sv-board-walk, .sv-rig .rg-bot) .robot .arm-a .shoulder { animation: sv-step-arm .5s ease-in-out infinite -.25s; }
+:is(.sv-board-walk, .sv-rig .rg-bot) .robot .arm-b .shoulder { animation: sv-step-arm .5s ease-in-out infinite; }
+@keyframes sv-step-hip { 0%, to { transform: rotate(-24deg); } 50% { transform: rotate(20deg); } }
+@keyframes sv-step-knee { 0%, 60%, to { transform: rotate(2deg); } 80% { transform: rotate(34deg); } }
+@keyframes sv-step-arm { 0%, to { transform: rotate(14deg); } 50% { transform: rotate(-12deg); } }
+/* sv-jump ported for parity (source theme-DOAwoE7X.css.beautified.css:2324-2342) but NOT
+   wired to this rig: its only real selector is `.sv-street.is-hi .walker .jump`, which
+   belongs to the separate street-walker scene (SiteHome-T3GVTo95.js, "sv-street" class,
+   commuter.js's engine here) — not this board-walk robot, even though both rigs happen to
+   reuse the class name ".jump" for their hull wrapper. Confirmed by grepping the source CSS
+   for every "sv-street"/"sv-jump" occurrence; judgment call documented for the record.
+@keyframes sv-jump { 0%, to { transform: translateY(0); } 40% { transform: translateY(-19px); } 64% { transform: translateY(-14px); } } */
+
+.sv-foot-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; padding-top: 20px; border-top: 1px solid var(--sv-line); }
+.sv-foot-grid h4 { color: var(--sv-ink-3); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 14px; }
+.sv-foot-grid .col { display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+.sv-foot-grid .col a:hover { color: var(--sv-amber-2); }
+.sv-foot-grid .muted { color: var(--sv-ink-3); font-size: 12.5px; }
+.sv-legal { display: flex; justify-content: space-between; padding-top: 40px; margin-top: 40px; border-top: 1px solid var(--sv-line); font-size: 12.5px; color: var(--sv-ink-3); }
+@media (max-width:760px){ .sv-foot-grid { grid-template-columns: repeat(2,1fr); } }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .sv-rv, .sv-lines .sv-ln > span > span, .sv-fade, .tool, .sv-card { transition: none !important; opacity: 1 !important; transform: none !important; }
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+}

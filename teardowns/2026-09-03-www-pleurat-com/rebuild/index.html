@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- FOUC theme script — ported verbatim in SPIRIT from source/rendered.html:9-16, but the
+     read key is fixed to 'sv-theme' (the key the real toggle actually writes) instead of
+     the original's 'theme-pref'. build-analysis.md documents a confirmed live bug: the
+     original's FOUC script reads 'theme-pref', a key nothing in the app ever writes, so
+     returning light-mode visitors get a dark flash. That bug is not reproduced here — see
+     VERIFICATION.md Gate 7 for the decision record. -->
+<script>
+try{
+  var t = localStorage.getItem('sv-theme');
+  if(t === 'light'){ document.documentElement.removeAttribute('data-theme'); }
+  else { document.documentElement.setAttribute('data-theme','dark'); }
+}catch(e){ document.documentElement.setAttribute('data-theme','dark'); }
+</script>
+<style>html,body{background:#050711;}html:not([data-theme="dark"]),html:not([data-theme="dark"]) body{background:#c2ffa8;}</style>
+<title>Pleurat Shala — Product Designer and AI Product Builder (Study Rebuild)</title>
+<meta name="description" content="Study rebuild of pleurat.com — a bo-rebuild teardown clone for animation/engineering study only. Not the real site.">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Fonts — REUSE-OK per assets/ASSETS.md: General Sans (Fontshare, free commercial) and
+     IBM Plex Mono (Google Fonts, OFL). Same CDN links as source/index.html:78-85. -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- .site-root (public-content amber/paper system) defaults to LIGHT/cream, confirmed
+     against screenshots/desktop-full.png + desktop-full-light.png (both light) even
+     though the outer chrome's data-theme defaults to dark on <html> — the two token
+     systems are independent (build-analysis.md "Color Palette"). React only adds
+     is-dark after reading localStorage['sv-theme'], which is unset for a first-time
+     visitor, so light is genuinely the default rendered appearance, not a rebuild
+     simplification. -->
+<div class="site-root" data-badge-root>
+
+  <!-- ============================= CURTAIN + BOOT LOADER =============================
+       Ported from kt(), source/js/index-DwCqBxFL.js.beautified.js:2419-2576.
+       K=8 columns, 38ms stagger/col, cover 746ms, hold 340ms, reveal 786ms+60ms.
+       Boot progress races document.fonts.ready against a 1100ms timer, hard-capped 3000ms. -->
+  <div class="sv-curtain is-on show-label" id="sv-curtain" aria-hidden="true">
+    <div class="sv-curtain-col" style="--i:0"></div>
+    <div class="sv-curtain-col" style="--i:1"></div>
+    <div class="sv-curtain-col" style="--i:2"></div>
+    <div class="sv-curtain-col" style="--i:3"></div>
+    <div class="sv-curtain-col" style="--i:4"></div>
+    <div class="sv-curtain-col" style="--i:5"></div>
+    <div class="sv-curtain-col" style="--i:6"></div>
+    <div class="sv-curtain-col" style="--i:7"></div>
+    <div class="sv-curtain-label is-boot" id="sv-curtain-label" style="--p:0">
+      <span class="name">Welcome<span class="d">.</span></span>
+    </div>
+  </div>
+
+  <!-- ============================= NAV ============================= -->
+  <!-- source/rendered.html:172-246 -->
+  <nav class="sv-nav">
+    <div class="sv-nav-in">
+      <a class="sv-brand" aria-label="Pleurat Shala — home" href="#top">
+        <svg class="sv-brand-logo" viewBox="0 0 240 71" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="pleurat">
+          <path d="M219.995 38.952V24.84H212.795V16.2H219.995V1.8H230.075V16.2H239.435V24.84H230.075V38.952C230.075 41.976 231.443 42.84 234.827 42.84H239.075V52.2H229.355C221.939 52.2 219.995 44.928 219.995 38.952Z"></path>
+          <path d="M199.88 48.6C197.288 51.552 193.616 53.352 188.792 53.352C178.208 53.352 170.648 44.712 170.648 33.984C170.648 23.256 178.208 15.12 188.792 15.12C193.544 15.12 197.216 16.776 199.808 19.584C201.32 21.168 201.536 24.12 202.184 26.208L203.912 25.632C203.264 23.616 201.968 21.096 201.968 18.936V16.2H212.048V52.2H201.968V49.248C201.968 47.088 203.264 44.496 203.84 42.48L202.184 41.904C201.536 43.992 201.32 46.944 199.88 48.6ZM180.728 33.984C180.728 39.384 184.472 43.992 189.512 43.992C194.552 43.992 198.368 39.384 198.44 33.984C198.44 28.512 195.344 24.48 189.512 24.48C184.472 24.48 180.728 28.512 180.728 33.984Z"></path>
+          <path d="M157.074 18.432C161.034 15.696 165.354 15.12 172.05 15.12V24.48C162.834 24.48 153.114 27.792 153.114 37.8V52.2H143.034V16.2H153.114V16.632C153.114 19.8 151.458 23.472 150.162 26.352L151.746 27.072C153.042 24.192 154.482 20.232 157.074 18.432Z"></path>
+          <path d="M128.536 50.112C125.728 52.848 123.064 53.28 118.024 53.28C110.752 53.28 103.768 49.032 103.768 40.896V16.2H113.848V34.488C113.848 41.976 117.304 44.496 122.128 44.496C127.384 44.496 130.768 41.4 130.768 34.488V16.2H140.848V52.2H130.768V50.976C130.84 48.888 132.208 46.512 132.928 44.568L131.272 43.92C130.552 45.864 130.048 48.672 128.536 50.112Z"></path>
+          <path d="M84.5061 53.352C69.2421 53.352 61.0341 44.712 61.0341 33.984C61.0341 23.256 69.9621 15.12 82.6341 15.12C95.7381 15.12 103.802 23.976 103.73 33.984C103.73 34.776 103.802 36.504 103.73 37.08H73.4181C73.4181 40.608 76.6581 44.928 83.4981 44.928C87.8901 44.928 90.6261 43.272 91.3461 41.904H102.938C101.858 45.648 96.3141 53.352 84.5061 53.352ZM73.4181 30.816H91.8501C91.8501 26.208 88.4661 22.824 82.9221 22.824C77.3061 22.824 73.4181 26.64 73.4181 30.816Z"></path>
+          <path d="M41.4349 43.488V0H51.5869V38.952C51.5869 41.976 52.9549 42.84 56.3389 42.84H60.5149V52.2H54.8269C46.3309 52.2 41.4349 48.888 41.4349 43.488Z"></path>
+          <path d="M10.08 49.392V70.2L0 70.272V16.272L10.08 16.2V18.792C10.08 20.952 8.784 23.472 8.064 25.488L9.792 26.064C10.44 24.048 10.728 21.024 12.24 19.512C14.832 16.704 18.576 15.048 23.328 15.048C34.128 15.048 41.688 23.4 41.4 34.128C41.04 44.352 33.624 53.28 23.4 53.28C18.576 53.28 14.904 51.336 12.312 48.6C10.8 47.088 10.44 44.136 9.72 42.12L7.992 42.696C8.712 44.712 10.08 47.232 10.08 49.392ZM21.744 24.408C15.696 24.408 12.24 28.44 12.24 33.912C12.24 39.384 15.696 43.92 21.744 43.92C27.792 43.92 31.32 39.384 31.32 33.912C31.32 28.44 27.792 24.408 21.744 24.408Z"></path>
+        </svg>
+      </a>
+      <div class="sv-nav-links">
+        <a aria-current="page" href="#top">Welcome</a>
+        <a href="#work" data-stub>Work</a>
+        <a href="#ai" data-stub>AI</a>
+        <a href="#about" data-stub>Profile</a>
+      </div>
+      <button class="sv-lights" id="sv-lights" aria-pressed="false" aria-label="Switch to light">
+        <svg class="sv-dial-mk" viewBox="0 0 20 20" aria-hidden="true">
+          <circle class="rim" cx="10" cy="10" r="6.6"></circle>
+          <path class="half" d="M10 3.4a6.6 6.6 0 0 0 0 13.2z"></path>
+        </svg>
+      </button>
+      <a class="sv-btn sv-btn--amber sv-nav-cta" href="#contact" data-stub>Contact</a>
+      <button class="sv-nav-toggle" id="sv-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="sv-nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="sv-nav-sheet" id="sv-nav-menu" aria-hidden="true">
+      <div class="sv-nav-sheet-in">
+        <nav class="links">
+          <span class="ln" style="--i: 0;"><span class="ix">01</span><a aria-current="page" href="#top">Welcome</a></span>
+          <span class="ln" style="--i: 1;"><span class="ix">02</span><a href="#work" data-stub>Work</a></span>
+          <span class="ln" style="--i: 2;"><span class="ix">03</span><a href="#ai" data-stub>AI</a></span>
+          <span class="ln" style="--i: 3;"><span class="ix">04</span><a href="#about" data-stub>Profile</a></span>
+          <span class="ln" style="--i: 4;"><span class="ix">05</span><a href="#contact-cta" data-stub>Contact</a></span>
+        </nav>
+        <div class="sv-nav-foot" style="--i: 6;">
+          <a href="mailto:hello@example.invalid">hello@example.invalid</a>
+          <span>Pristina · CET</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================= HERO ============================= -->
+  <!-- source/rendered.html:247-2354. Commuter street-scene embedded per build-analysis.md
+       item #2 — SIMPLIFIED here (see VERIFICATION.md): buildings/lamps ported as a
+       representative parallax cityscape rather than the full hand-tuned rect list, walker
+       rig uses the real sv-walk-* keyframes (theme-DOAwoE7X.css.beautified.css:2002-2264). -->
+  <header class="sv-hero" id="top">
+    <div class="sv-wrap">
+      <div class="sv-hero-grid">
+        <h1 class="sv-lines is-in">
+          <span class="sv-ln"><span><span>I design apps, websites,</span></span></span>
+          <span class="sv-ln"><span><span>and <span class="sv-dim">AI-powered systems</span></span></span></span>
+        </h1>
+        <div class="sv-rv is-in sv-hero-right">
+          <p>10+ years designing the systems, brands and AI workflows behind products people actually use, serving millions of users every day.</p>
+          <div class="sv-hero-cta">
+            <a class="sv-btn sv-btn--amber" href="#work" data-stub>View selected work
+              <svg class="sv-ar sv-ar--ne" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 18.5 L18.5 5.5"></path><path d="M9.5 5.5 H18.5 V14.5"></path></svg>
+            </a>
+            <a class="sv-btn sv-btn--ghost" href="#about" data-stub>About me
+              <svg class="sv-ar sv-ar--ne" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 18.5 L18.5 5.5"></path><path d="M9.5 5.5 H18.5 V14.5"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sv-rv is-in sv-street sv-street--line" id="sv-street" style="--wk: 0.84s;">
+        <div class="sv-street-read" aria-live="polite" id="sv-street-read">
+          <span class="ix">01</span>
+          <span class="say"><span class="name">Hoopit AI</span><span class="role">Senior Product Designer</span></span>
+          <span class="ahead" aria-hidden="true">Next projects</span>
+        </div>
+        <div class="sv-street-view" role="img" aria-label="A walk past 10 teams (reference names — study rebuild, real client roster not reproduced). Click and the walker says hi." style="aspect-ratio: 2320/151;">
+          <svg viewBox="0 0 2320 151" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+            <defs>
+              <radialGradient id="sv-lamp-glow"><stop offset="0" stop-color="#FFE3A6" stop-opacity=".95"></stop><stop offset=".4" stop-color="#F3B44A" stop-opacity=".42"></stop><stop offset="1" stop-color="#F3B44A" stop-opacity="0"></stop></radialGradient>
+            </defs>
+            <g class="far" id="sv-street-far">
+              <circle class="sun-halo" cx="560" cy="40" r="30"></circle><circle class="sun" cx="560" cy="40" r="15"></circle>
+              <circle class="sun-halo" cx="1860" cy="40" r="30"></circle><circle class="sun" cx="1860" cy="40" r="15"></circle>
+              <rect x="-100" y="80" width="54" height="52"></rect>
+              <rect x="114" y="43" width="77" height="89"></rect>
+              <rect x="328" y="52" width="60" height="80"></rect>
+              <rect x="542" y="61" width="83" height="71"></rect>
+              <rect x="756" y="70" width="66" height="62"></rect>
+              <rect x="970" y="79" width="89" height="53"></rect>
+              <rect x="1184" y="42" width="72" height="90"></rect>
+              <rect x="1398" y="51" width="55" height="81"></rect>
+              <rect x="1612" y="60" width="78" height="72"></rect>
+              <rect x="1826" y="43" width="72" height="89"></rect>
+              <rect x="2040" y="52" width="60" height="80"></rect>
+            </g>
+            <g class="road"><rect x="-200" y="132" width="2720" height="19" class="road-strip"></rect></g>
+            <g class="walker" id="sv-walker" style="transform: translateX(120px);">
+              <g class="body" transform="translate(0,90)">
+                <g class="leg-b"><rect class="thigh" width="6" height="24" x="-3" y="0"></rect><rect class="foot" width="14" height="5" x="-7" y="24"></rect></g>
+                <g class="leg-f"><rect class="thigh" width="6" height="24" x="-3" y="0"></rect><rect class="foot" width="14" height="5" x="-7" y="24"></rect></g>
+                <g class="lift"><rect class="torso" width="16" height="26" x="-8" y="-26" rx="4"></rect></g>
+                <g class="arm"><g class="shoulder"><rect width="5" height="18" x="6" y="-22"></rect></g></g>
+                <circle class="head" cx="0" cy="-34" r="7"></circle>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================= CONSOLE / WORKSPACE DEMO ============================= -->
+  <!-- source/rendered.html:2355-2544. DOM id is literally "contact" in the original but the
+       content is the fake-terminal demo widget (Console-CyBRxdTz.js) — there is no real
+       contact form. Kept id="contact" to mirror the manifest selector for Gate 1, content
+       renamed sv-console in class + a code comment so nobody mistakes it for a form. -->
+  <section class="sv-wrap sv-pad sv-outro" id="contact">
+    <div class="sv-cn" id="sv-console">
+      <div class="sv-cn-bar">
+        <span class="sq"><i></i><i></i><i></i></span>
+        <span class="crumb">portfolio / workspace / workspace</span>
+        <span class="pill">Ready</span>
+      </div>
+      <div class="sv-cn-body">
+        <aside class="sv-cn-side">
+          <h4>Expertise</h4>
+          <ul class="sv-cn-jobs" id="sv-cn-jobs">
+            <li class="is-sel is-built" data-job="0"><span class="t">Workspace</span><span class="s">Bench · Live</span></li>
+            <li data-job="1"><span class="t">AI Workflow</span><span class="s">Agents · Daily</span></li>
+            <li data-job="2"><span class="t">Design System</span><span class="s">Library · 12 parts</span></li>
+            <li data-job="3"><span class="t">Product Design</span><span class="s">End to end · 8+ yrs</span></li>
+          </ul>
+          <div class="sv-cn-progress" id="sv-cn-progress">1 / 4 opened</div>
+        </aside>
+        <div class="sv-cn-canvas">
+          <div class="sv-cn-stageline"><strong>Workspace</strong><span>Bench · Live</span></div>
+          <svg class="sv-cn-diagram" viewBox="0 0 640 220" aria-hidden="true">
+            <g class="dg-nodes" id="sv-cn-diagram-g">
+              <path class="dg-l" d="M60 40 H160"></path>
+              <path class="dg-l" d="M220 40 H320"></path>
+              <path class="dg-l" d="M380 40 V90 M380 40 H440"></path>
+              <path class="dg-l" d="M380 110 H320 V150"></path>
+              <path class="dg-l" d="M440 60 V150 H380"></path>
+              <path class="dg-l" d="M320 180 H440"></path>
+              <rect class="dg-n" x="10" y="20" width="90" height="40" rx="6"></rect><text class="dg-t" x="55" y="44">Brief</text>
+              <rect class="dg-n" x="170" y="20" width="90" height="40" rx="6"></rect><text class="dg-t" x="215" y="44">Explore</text>
+              <rect class="dg-n" x="330" y="10" width="100" height="60" rx="6"></rect><text class="dg-t" x="380" y="36">In the</text><text class="dg-t" x="380" y="52">system?</text>
+              <rect class="dg-n" x="450" y="30" width="90" height="40" rx="6"></rect><text class="dg-t" x="495" y="54">Reuse</text>
+              <rect class="dg-n" x="330" y="130" width="100" height="40" rx="6"></rect><text class="dg-t" x="380" y="154">New pattern</text>
+              <rect class="dg-n" x="330" y="160" width="100" height="40" rx="6"></rect><text class="dg-t" x="380" y="184">Add to lib</text>
+              <rect class="dg-n" x="450" y="160" width="90" height="40" rx="6"></rect><text class="dg-t" x="495" y="184">Ship</text>
+            </g>
+          </svg>
+          <div class="sv-note sticky s-1">Reuse before you add. Every new pattern is a thing somebody has to maintain.</div>
+          <div class="sv-note sticky s-2">Empty state? ask design</div>
+          <article class="pane chat">
+            <div class="pane-label">Chat</div>
+            <p class="msg user">make the rail crop the second card</p>
+            <p class="msg ai">On it — a 24px reveal on the second.<br>Editing WorkRail.tsx</p>
+            <div class="pane-sig">Pleurat</div>
+          </article>
+          <div class="vars"><span>figma</span><span>cursor</span><span>claude</span><span>live · never finished</span></div>
+        </div>
+      </div>
+      <div class="sv-cn-log" id="sv-cn-log"></div>
+      <form class="sv-cn-prompt" id="sv-cn-prompt">
+        <input type="text" id="sv-cn-input" placeholder="try: open workspace" autocomplete="off">
+        <div class="sv-cn-actions">
+          <button type="button" data-cmd="next">next</button>
+          <button type="button" data-cmd="help">help</button>
+          <button type="button" data-cmd="clear">clear</button>
+        </div>
+      </form>
+      <div class="sv-cn-foot">
+        <strong>FIG. 004 — Four tracks, one bench</strong>
+        <span>Workspace, AI, systems, product — open one on the left</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= FOCUS / TRACKS ============================= -->
+  <!-- source/rendered.html:2545-2791, content/04-focus-tracks.md. Only track 1 of 3 was
+       ever captured live (Previous button disabled at capture) — tracks 2/3 title+copy are
+       an honest gap, not invented; see VERIFICATION.md. -->
+  <section id="focus" class="sv-inst-sec" data-badge="Tracks">
+    <div class="sv-wrap sv-inst-pin">
+      <h2 class="sv-lines">Primarily <strong>focused on</strong></h2>
+      <p class="sv-fade">Ten years of shipping, settled into three tracks that sharpen each other every day.</p>
+      <div class="sv-inst-body">
+        <svg class="sv-inst-art" viewBox="0 0 320 240" role="img" aria-label="Product design — an artboard assembling itself" aria-hidden="false">
+          <rect class="art-board" x="20" y="20" width="280" height="200" rx="8"></rect>
+          <rect class="art-in a1" x="40" y="44" width="120" height="16" rx="3"></rect>
+          <rect class="art-in a2" x="40" y="72" width="240" height="60" rx="6"></rect>
+          <rect class="art-in a3" x="40" y="144" width="100" height="40" rx="6"></rect>
+          <rect class="art-in a4" x="150" y="144" width="130" height="40" rx="6"></rect>
+        </svg>
+        <div class="sv-reading" id="sv-reading">
+          <div class="sv-track" data-track="0">
+            <span class="badge">10+ YEARS</span>
+            <h3>Product Design</h3>
+            <p>Most aspects of design and business, end-to-end, while shipping a product.</p>
+          </div>
+        </div>
+      </div>
+      <div class="sv-rnav">
+        <button type="button" id="sv-track-prev" disabled aria-label="Previous track">←</button>
+        <span id="sv-track-ix">1 / 3</span>
+        <button type="button" id="sv-track-next" aria-label="Next track">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= CHART / BY THE NUMBERS (pinned scene) ============================= -->
+  <!-- source/rendered.html:2792-2861. Pin mechanics: generic Ve()/b primitive,
+       theme-CvJK8SGN.js.beautified.js:188-218 — container height = 100vh+(steps-1)*95vh,
+       progress = clamp(-rect.top/(rect.height-innerHeight),0,1). Diagram draw-on keyframes
+       (sv-b-wire/node/lbl/line/path/stick/type, 5000ms linear) confirmed live in
+       source/runtime-probes.json. Stat targets: the live site still shows placeholder "0+"
+       (a broken/un-fired count-up, per README.md known issues) — real numbers are not
+       recoverable from the teardown. The values below are placeholders invented for this
+       demo so the count-up animation has something to animate to; NOT extracted data. -->
+  <section class="sv-chart-sec" id="sv-chart-sec">
+    <div class="sv-chart-pin">
+      <div class="sv-chart-track" id="sv-chart-track">
+        <svg class="sv-b-diagram" viewBox="0 0 900 420" aria-hidden="true">
+          <path class="sv-b-wire" d="M80 80 H300 V200 H520"></path>
+          <path class="sv-b-wire" d="M300 80 V200"></path>
+          <path class="sv-b-wire" d="M520 200 H740 V320"></path>
+          <path class="sv-b-wire" d="M520 200 V320 H300"></path>
+          <path class="sv-b-line" d="M300 320 V80"></path>
+          <path class="sv-b-path" d="M80 80 Q400 20 740 320"></path>
+          <circle class="sv-b-node" cx="80" cy="80" r="7"></circle>
+          <circle class="sv-b-node" cx="300" cy="80" r="7"></circle>
+          <circle class="sv-b-node" cx="520" cy="200" r="7"></circle>
+          <circle class="sv-b-node" cx="740" cy="320" r="7"></circle>
+          <circle class="sv-b-node" cx="300" cy="320" r="7"></circle>
+          <text class="sv-b-lbl" x="80" y="65">Discover</text>
+          <text class="sv-b-lbl" x="300" y="65">Design</text>
+          <text class="sv-b-lbl" x="500" y="185">Build</text>
+          <text class="sv-b-lbl" x="720" y="305">Ship</text>
+          <rect class="sv-b-stick" x="560" y="60" width="150" height="70" rx="4"></rect>
+          <text class="sv-b-type" x="575" y="100">ship it →</text>
+        </svg>
+        <div class="sv-chart-copy">
+          <span class="sv-pin-badge">By the numbers</span>
+          <h2 class="sv-lines">Ten years,<br><strong>by the numbers.</strong></h2>
+          <p>Products shipped, teams joined, systems maintained — the decade counted rather than described.</p>
+          <a class="sv-btn sv-btn--ghost" href="#about" data-stub>Read the full profile
+            <svg class="sv-ar sv-ar--ne" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 18.5 L18.5 5.5"></path><path d="M9.5 5.5 H18.5 V14.5"></path></svg>
+          </a>
+          <div class="sv-chart" id="sv-chart-stats">
+            <div class="stat" style="--d:0ms" data-target="10"><span class="n" data-count>0</span><span class="p">+</span><span class="l">Years designing</span></div>
+            <div class="stat" style="--d:140ms" data-target="80"><span class="n" data-count>0</span><span class="p">+</span><span class="l">Websites designed</span></div>
+            <div class="stat" style="--d:280ms" data-target="45"><span class="n" data-count>0</span><span class="p">+</span><span class="l">Products shipped</span></div>
+            <div class="stat" style="--d:420ms" data-target="12"><span class="n" data-count>0</span><span class="p">+</span><span class="l">Industries workd</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= AI TOOLS GRID ============================= -->
+  <!-- source/rendered.html:2862-2961, content/06-ai-tools.md -->
+  <section class="sv-wrap sv-pad" id="tools" data-badge="AI tools">
+    <h2 class="sv-lines">AI is part of how I <strong>design &amp; build</strong>,<br>every day.</h2>
+    <p class="sv-fade">Not a novelty — a daily practice. These are the tools I reach for to move from a rough idea to a shipped, working product.</p>
+    <div class="sv-tools" id="sv-tools">
+      <div class="tool"><img src="assets/images/logo-claude.webp" alt="Claude logo" loading="lazy"></div>
+      <div class="tool" style="opacity:.92"><img src="assets/images/logo-figma.webp" alt="Figma logo" loading="lazy"></div>
+      <div class="tool" style="opacity:.84"><img src="assets/images/logo-cursor.webp" alt="Cursor logo" loading="lazy"></div>
+      <div class="tool"><img src="assets/images/logo-supabase.webp" alt="Supabase logo" loading="lazy"></div>
+      <div class="tool" style="opacity:.74"><img src="assets/images/logo-vercel.webp" alt="Vercel logo" loading="lazy"></div>
+      <div class="tool" style="opacity:.98"><img src="assets/images/logo-openai.webp" alt="OpenAI logo" loading="lazy"></div>
+      <div class="tool"><span class="ring" role="img" aria-label="Meta logo"></span></div>
+      <div class="tool" style="opacity:.9"><img src="assets/svg/logo-grok.svg" alt="Grok logo" loading="lazy"></div>
+      <div class="tool" style="opacity:.9"><img src="assets/svg/logo-github.svg" alt="GitHub logo" loading="lazy"></div>
+      <div class="tool"><img src="assets/svg/logo-tailwind.svg" alt="Tailwind logo" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ============================= TEAMS / LEDGER CARD GRID ============================= -->
+  <!-- source/rendered.html:2962-3036, content/07-teams.md. Card copy REFERENCE-ONLY,
+       lightly reworded per the content file's own instruction not to ship it verbatim. -->
+  <section class="sv-wrap sv-pad" id="profile" data-badge="Teams">
+    <h2 class="sv-lines">Where I've <strong>worked</strong></h2>
+    <p class="sv-fade">From global banks to independent apps — product, brand and systems for teams of every size.</p>
+    <div class="sv-board" id="sv-board">
+      <article class="sv-card"><span class="ix">A1</span><h3>Hoopit AI</h3><span class="role">Senior Product Designer</span><p>Design for an AI relationship-intelligence platform.</p></article>
+      <article class="sv-card"><span class="ix">A2</span><h3>Santander UK</h3><span class="role">Senior Product Designer</span><p>Banking UX flows used by millions of customers.</p></article>
+      <article class="sv-card"><span class="ix">A3</span><h3>Appello</h3><span class="role">Lead Product Designer</span><p>Discovery for a care-tech mobile app, MVP scope.</p></article>
+      <article class="sv-card"><span class="ix">A4</span><h3>Toyota</h3><span class="role">Brand &amp; Interface</span><p>Product and brand interface work for an automotive name.</p></article>
+      <article class="sv-card"><span class="ix">A5</span><h3>Gjirafa</h3><span class="role">UI / Product Designer</span><p>Consumer products for the region's largest tech company.</p></article>
+      <article class="sv-card"><span class="ix">A6</span><h3>ThemeForest</h3><span class="role">Frontend Developer &amp; Author</span><p>Website templates built and sold to hundreds of clients.</p></article>
+      <article class="sv-card"><span class="ix">A7</span><h3>Nacew</h3><span class="role">Product Designer</span><p>AI-powered products for millions of users.</p></article>
+      <article class="sv-card"><span class="ix">A8</span><h3>FourTwoThree</h3><span class="role">Product Designer</span><p>A platform for measuring carbon footprints.</p></article>
+      <article class="sv-card"><span class="ix">A9</span><h3>Otee</h3><span class="role">Product Designer</span><p>An online laundry ecosystem — five surfaces, one system.</p></article>
+      <article class="sv-card"><span class="ix">A10</span><h3>AI Journey</h3><span class="role">Design &amp; AI Workflows</span><p>Ongoing experiments designing alongside agents.</p></article>
+    </div>
+  </section>
+
+  <!-- ============================= MOSAIC (pinned horizontal scrub) ============================= -->
+  <!-- source/rendered.html:3037-3104, content/08-mosaic.md. 20 tiles, --cols:5. The exact
+       horizontal-scrub driver JS was never fetched (build-analysis.md Gotcha #2 — lives in
+       an out-of-scope route chunk) — reconstructed here using the SAME generic scroll-pin
+       primitive (Ve()/b) as the chart scene, translateX-ing a 5-col grid across the pin's
+       scroll range. INFERRED mechanism, see VERIFICATION.md. -->
+  <section class="sv-mosaic-track" id="sv-mosaic-track" aria-label="Selected screens (reference imagery, study rebuild)">
+    <div class="sv-mosaic-pin">
+      <a href="#work" data-stub class="sv-mosaic-link" aria-label="Explore all work">
+        <div class="sv-mosaic-grid" id="sv-mosaic-grid" style="--cols:5">
+          <figure class="tile"><img src="assets/images/sanity-210533e0-2880x2160_w1200.avif" alt="ProFolio 3" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-4155bb3d-2880x2160_w1200.avif" alt="Otee 1" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-bfc67236-2880x2160_w1200.avif" alt="4" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-639542a2-2880x2160_w1200.avif" alt="3" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-4fae8a64-2880x2160_w1200.avif" alt="ProFolio" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-e8d3e8e8-2880x2160_w1200.avif" alt="MindPath — app dashboard" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-2838d08b-2880x2160_w1200.avif" alt="MindPath — patient view" loading="eager"></figure>
+          <figure class="tile is-lead"><img src="assets/images/sanity-43c20612-2880x2160_w2400.avif" alt="Selected work" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-0f0defcf-2880x2160_w1200.avif" alt="Otee — order flow" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-603804ec-2880x2160_w1200.avif" alt="Landing — pricing" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-c4dbd75a-2880x2160_w1200.avif" alt="Landing — long-form" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-38ac069e-2300x1725_w1200.avif" alt="Website — sections" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-492514a0-2880x2160_w1200.avif" alt="Website — layout" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-1eadd895-3840x2880_w1200.avif" alt="Retail analytics — dashboard overview" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-a3ed14e8-3840x2880_w1200.avif" alt="Codex — choose an organisation" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-e2837b19-3840x2880_w1200.avif" alt="Codex — create environment" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-9f454c8f-3840x2880_w1200.avif" alt="Codex — import jobs" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-e452cdd4-3840x2880_w1200.avif" alt="Codex — entry editor" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-2227c498-2880x2160_w1200.avif" alt="Practice Lab — mental health programmes" loading="eager"></figure>
+          <figure class="tile"><img src="assets/images/sanity-c00dddf0-3840x2880_w1200.avif" alt="Codex — all entries &amp; labels" loading="eager"></figure>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================= FOOTER ============================= -->
+  <!-- source/rendered.html:3105-3269. Board-walk marquee lives only here — $e(),
+       theme-CvJK8SGN.js.beautified.js:846-984. b=300 (chip cell width), d=118, Z=168
+       (viewBox height), pe=190 (px/sec), V=60 (ground-pad spacing). -->
+  <footer class="sv-footer sv-ruled">
+    <div class="sv-wrap">
+      <div class="sv-board-walk" id="sv-board-walk">
+        <div class="sv-board-stage" id="sv-board-stage">
+          <div class="sv-board-lead"><a class="sv-btn sv-btn--amber" href="#work" data-stub>Explore portfolio
+            <svg class="sv-ar sv-ar--ne" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 18.5 L18.5 5.5"></path><path d="M9.5 5.5 H18.5 V14.5"></path></svg>
+          </a></div>
+          <div class="sv-board-read" aria-live="polite" id="sv-board-read">
+            <span class="ix">01</span><span class="say"><span class="name">Claude</span><span class="role">Daily kit</span></span>
+          </div>
+          <div class="sv-board-view" role="img" aria-label="A walk across the board: Claude, Figma, Cursor, Supabase, Vercel, OpenAI, Meta, Grok, GitHub, Tailwind" style="aspect-ratio: 1560/168;">
+            <svg viewBox="0 0 1560 168" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <g class="cam">
+                <g class="pads" id="sv-board-pads"></g>
+                <g class="world" id="sv-board-world"></g>
+              </g>
+            </svg>
+            <span class="sv-board-hi" id="sv-board-hi" hidden aria-hidden="true">Hi 👋</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sv-foot-grid">
+        <div class="col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@example.invalid">hello@example.invalid</a>
+          <p>Lets get in touch!</p>
+          <span class="muted">Response within 24 hours</span>
+        </div>
+        <div class="col">
+          <h4>Sitemap</h4>
+          <a href="#top">Welcome</a>
+          <a href="#work" data-stub>Work</a>
+          <a href="#ai" data-stub>AI</a>
+          <a href="#about" data-stub>Profile</a>
+        </div>
+        <div class="col">
+          <h4>Elsewhere</h4>
+          <a href="#" data-stub target="_blank" rel="noopener noreferrer">Awwwards<svg class="sv-ar sv-ar--ne sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 18.5 L18.5 5.5"></path><path d="M9.5 5.5 H18.5 V14.5"></path></svg></a>
+          <a href="#" data-stub target="_blank" rel="noopener noreferrer">Dribbble<svg class="sv-ar sv-ar--ne sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 18.5 L18.5 5.5"></path><path d="M9.5 5.5 H18.5 V14.5"></path></svg></a>
+          <a href="#" data-stub target="_blank" rel="noopener noreferrer">LinkedIn<svg class="sv-ar sv-ar--ne sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 18.5 L18.5 5.5"></path><path d="M9.5 5.5 H18.5 V14.5"></path></svg></a>
+          <a href="#" data-stub target="_blank" rel="noopener noreferrer">ThemeForest<svg class="sv-ar sv-ar--ne sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 18.5 L18.5 5.5"></path><path d="M9.5 5.5 H18.5 V14.5"></path></svg></a>
+        </div>
+        <div class="col">
+          <h4>Studio</h4>
+          <span>Pristina · CET Europe</span>
+          <span class="muted">Product design · Systems · AI</span>
+        </div>
+      </div>
+
+      <div class="sv-legal">
+        <span>© 2026 Pleurat Shala — All rights reserved (study rebuild, not the real site)</span>
+        <a href="#privacy" data-stub>Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
