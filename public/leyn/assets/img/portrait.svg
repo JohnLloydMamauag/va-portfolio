@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Portrait placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFEAE5"/>
+      <stop offset="1" stop-color="#FFDCE2"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4A3B66"/>
+      <stop offset="1" stop-color="#3A2E52"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <circle cx="300" cy="250" r="200" fill="#EDC4D6" opacity=".22"/>
+
+  <!-- shoulders -->
+  <path d="M120 600c0-110 80-176 180-176s180 66 180 176z" fill="#7A72C4"/>
+  <path d="M258 404h84v70h-84z" fill="#F2CBD3"/>
+
+  <!-- head -->
+  <ellipse cx="300" cy="285" rx="98" ry="116" fill="#FAD9DE"/>
+  <!-- hair -->
+  <path d="M300 150c-70 0-112 46-112 116 0 22 5 44 5 44l16-58c40 10 142 12 190-16l14 74s7-24 7-46c0-72-44-114-120-114z" fill="url(#hair)"/>
+  <path d="M188 266c-14 44-18 108-6 158 8-64 6-110 18-140z" fill="url(#hair)"/>
+  <path d="M412 266c14 44 18 108 6 158-8-64-6-110-18-140z" fill="url(#hair)"/>
+
+  <!-- face -->
+  <circle cx="264" cy="284" r="8" fill="#3A2E52"/>
+  <circle cx="336" cy="284" r="8" fill="#3A2E52"/>
+  <path d="M250 262c9-8 21-9 30-4M320 258c9-5 21-4 30 4" stroke="#3A2E52" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M296 300c-4 12-10 18-2 22h12" stroke="#D9A9B8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M272 344c18 14 38 14 56 0" stroke="#6E5B9E" stroke-width="8" stroke-linecap="round" fill="none"/>
+</svg>
